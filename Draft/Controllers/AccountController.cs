@@ -53,7 +53,7 @@ namespace Draft.Controllers
             }
             return View(user);
         }
-
+        //testlol
 
         // POST: /User/Logout
         [HttpPost]
