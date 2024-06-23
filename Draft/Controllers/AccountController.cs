@@ -1,6 +1,7 @@
 ﻿using Draft.Data;
 using Draft.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using System;
 
 namespace Draft.Controllers
@@ -28,6 +29,9 @@ namespace Draft.Controllers
             if (user != null)
             {
                 // Set session or cookies here
+                HttpContext.Session.SetString("Username", user.Username);
+                HttpContext.Session.SetString("UserRole", user.UserRole.ToString());
+                HttpContext.Session.SetString("id", user.Id.ToString());
                 return RedirectToAction("Index", "Home");
             }
 
@@ -45,6 +49,16 @@ namespace Draft.Controllers
         [HttpPost]
         public IActionResult Register(User user)
         {
+            if (_context.Users.Any(u => u.Email == user.Email))
+            {
+                ModelState.AddModelError("Email", "Email already in use.");
+            }
+
+            if (_context.Users.Any(u => u.Username == user.Username))
+            {
+                ModelState.AddModelError("Username", "Username already taken.");
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Users.Add(user);
@@ -53,13 +67,13 @@ namespace Draft.Controllers
             }
             return View(user);
         }
-        //testlol
 
         // POST: /User/Logout
         [HttpPost]
         public IActionResult Logout()
         {
             // Clear session or cookies here
+            HttpContext.Session.Clear();
             return RedirectToAction("Login");
         }
 

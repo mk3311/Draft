@@ -4,6 +4,13 @@
 
 <h2>Login</h2>
 
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        @Html.ValidationSummary()
+    </div>
+}
+
 <form asp-action="Login">
     <div class="form-group">
         <label for="username">Username</label>
