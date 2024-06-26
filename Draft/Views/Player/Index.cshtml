@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Draft.Models.Player>
+
+@{
+    ViewData["Title"] = "Players";
+}
+
+<h2>Players</h2>
+
+<!-- Wyszukiwarka -->
+<form asp-action="Index" method="get" class="mb-3">
+    <div class="form-row">
+        <div class="col">
+            <input type="text" name="firstName" class="form-control" placeholder="First Name" value="@Context.Request.Query["firstName"]" />
+        </div>
+        <div class="col">
+            <input type="text" name="lastName" class="form-control" placeholder="Last Name" value="@Context.Request.Query["lastName"]" />
+        </div>
+        <div class="col">
+            <input type="text" name="nationality" class="form-control" placeholder="Nationality" value="@Context.Request.Query["nationality"]" />
+        </div>
+        <div class="col">
+            <select name="positionId" class="form-control">
+                <option value="">All Positions</option>
+                @foreach (var position in ViewData["Positions"] as List<Draft.Models.Position>)
+                {
+                    <option value="@position.Id">@position.Name</option>
+                }
+            </select>
+        </div>
+        <div class="col">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </div>
+</form>
+
+<div class="row">
+    @foreach (var player in Model)
+    {
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <img class="card-img-top" src="@player.PhotoPath" alt="@player.FirstName @player.LastName" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">@player.FirstName @player.LastName</h5>
+                </div>
+            </div>
+        </div>
+    }
+</div>
