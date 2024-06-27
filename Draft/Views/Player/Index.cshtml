@@ -37,12 +37,14 @@
     @foreach (var player in Model)
     {
         <div class="col-md-3 mb-4">
-            <div class="card">
-                <img class="card-img-top" src="@player.PhotoPath" alt="@player.FirstName @player.LastName" style="height: 200px; object-fit: cover;">
-                <div class="card-body">
-                    <h5 class="card-title">@player.FirstName @player.LastName</h5>
+            <a asp-action="Details" asp-route-id="@player.Id" class="card-link">
+                <div class="card">
+                    <img class="card-img-top" src="@player.PhotoPath" alt="@player.FirstName @player.LastName" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">@player.FirstName @player.LastName</h5>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     }
 </div>

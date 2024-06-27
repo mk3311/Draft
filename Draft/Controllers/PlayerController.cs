@@ -1,4 +1,5 @@
 ﻿using Draft.Data;
+using Draft.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -46,5 +47,114 @@ namespace Draft.Controllers
 
             return View(players.ToList());
         }
+
+
+        public IActionResult Details(int id)
+        {
+            var player = _context.Players
+                                 .Include(p => p.Position)
+                                 .FirstOrDefault(p => p.Id == id);
+
+            if (player == null)
+            {
+                return NotFound();
+            }
+
+            return View(player);
+        }
+
+        public IActionResult EditPlayer(int? id)
+        {
+            var userRole = HttpContext.Session.GetString("UserRole");
+            if (userRole != "Admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var positions = _context.Positions.ToList();
+            ViewData["Positions"] = positions;
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var player = _context.Players.FirstOrDefault(p => p.Id == id);
+
+            if (player == null)
+            {
+                return NotFound();
+            }
+
+            return View(player);
+        }
+
+        [HttpPost]
+        public IActionResult EditPlayer(Player updateplayer)
+        {
+            var player = _context.Players.FirstOrDefault(p => p.Id == updateplayer.Id);
+
+            if (player == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+
+            if (ModelState.IsValid)
+            {
+                player.FirstName = updateplayer.FirstName;
+                player.LastName = updateplayer.LastName;
+                player.Age = updateplayer.Age;
+                player.Height = updateplayer.Height;
+                player.ClubName = updateplayer.ClubName;
+                player.PositionId = updateplayer.PositionId;
+                player.Nationality = updateplayer.Nationality;
+                player.PhotoPath = updateplayer.PhotoPath;
+                _context.SaveChanges();
+                return RedirectToAction("Details", new {id = player.Id});
+            }
+
+            var positions = _context.Positions.ToList();
+            ViewData["Positions"] = positions;
+            return View(updateplayer);
+        }
+
+
+        public IActionResult DeletePlayer(int? id)
+        {
+            var userRole = HttpContext.Session.GetString("UserRole");
+            if (userRole != "Admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var player = _context.Players.FirstOrDefault(p => p.Id == id);
+            if (player == null)
+            {
+                return NotFound();
+            }
+
+            return View(player);
+        }
+
+        [HttpPost]
+        public IActionResult DeletePlayer(int id)
+        {
+            var player = _context.Players.FirstOrDefault(p => p.Id == id);
+            if (player == null)
+            {
+                return NotFound();
+            }
+
+            _context.Players.Remove(player);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
     }
 }

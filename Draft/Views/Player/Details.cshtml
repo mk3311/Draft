@@ -1,0 +1,31 @@
+﻿@model Draft.Models.Player
+
+@{
+    ViewData["Title"] = $"{Model.FirstName} {Model.LastName} - Details";
+}
+
+<h2>@Model.FirstName @Model.LastName - Details</h2>
+
+<div class="card mb-3">
+    <img src="@Model.PhotoPath" class="card-img-top" alt="@Model.FirstName @Model.LastName" style="max-width: 400px; max-height: 400px; object-fit: contain;">
+    <div class="card-body">
+        <h5 class="card-title">Position: @Model.Position.Name</h5>
+        <p class="card-text"><strong>First Name:</strong> @Model.FirstName</p>
+        <p class="card-text"><strong>Last Name:</strong> @Model.LastName</p>
+        <p class="card-text"><strong>Nationality:</strong> @Model.Nationality</p>
+        <p class="card-text"><strong>Age:</strong> @Model.Age</p>
+        <p class="card-text"><strong>Height:</strong> @Model.Height cm</p>
+        <p class="card-text"><strong>Club Name:</strong> @Model.ClubName</p>
+    </div>
+</div>
+
+@{
+    var userRole = Context.Session.GetString("UserRole");
+    if (userRole != null && userRole == "Admin")
+    {
+        <a asp-action="EditPlayer" asp-route-id="@Model.Id" class="btn btn-primary">Edit Player</a>
+        <a asp-action="DeletePlayer" asp-route-id="@Model.Id" class="btn btn-danger">Delete Player</a>
+    }
+}
+
+<a asp-action="Index" class="btn btn-secondary">Back to Players List</a>

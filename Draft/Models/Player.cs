@@ -29,12 +29,10 @@ namespace Draft.Models
         [StringLength(100)]
         public string ClubName { get; set; }
 
-        [Required]
-        public int PositionId { get; set; }
+        public int? PositionId { get; set; }
 
-        // Navigation property
         [ForeignKey("PositionId")]
-        public Position Position { get; set; }
+        public Position? Position { get; set; }
 
         public string PhotoPath { get; set; }
     }
