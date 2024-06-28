@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Draft.Models
 {
@@ -16,6 +17,12 @@ namespace Draft.Models
         public string Password { get; set; }
 
         public UserRole UserRole { get; set; }
+
+        public int? TeamId { get; set; }
+
+        [ForeignKey("TeamId")]
+        public Team Team { get; set; }
+
         public User()
         {
             UserRole = UserRole.User;

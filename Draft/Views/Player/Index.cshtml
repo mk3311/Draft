@@ -2,6 +2,13 @@
 
 @{
     ViewData["Title"] = "Players";
+    var sortOrder = Context.Request.Query["sortOrder"];
+    var sortDirection = Context.Request.Query["sortDirection"];
+    var newSortDirection = sortDirection == "asc" ? "desc" : "asc";
+    var currentFirstName = Context.Request.Query["firstName"];
+    var currentLastName = Context.Request.Query["lastName"];
+    var currentNationality = Context.Request.Query["nationality"];
+    var currentPositionId = Context.Request.Query["positionId"];
 }
 
 <h2>Players</h2>
@@ -32,6 +39,43 @@
         </div>
     </div>
 </form>
+
+<!-- Sortowanie -->
+<div class="mb-3">
+    <a asp-action="Index"
+       asp-route-sortOrder="firstName"
+       asp-route-sortDirection="@((sortOrder == "firstName" && sortDirection == "asc") ? "desc" : "asc")"
+       asp-route-firstName="@currentFirstName"
+       asp-route-lastName="@currentLastName"
+       asp-route-nationality="@currentNationality"
+       asp-route-positionId="@currentPositionId">Sort by First Name @if (sortOrder == "firstName")
+        {
+            <i class="fas @(sortDirection == "asc" ? "fa-sort-up" : "fa-sort-down")"></i>
+        }</a>
+    |
+    <a asp-action="Index"
+       asp-route-sortOrder="lastName"
+       asp-route-sortDirection="@((sortOrder == "lastName" && sortDirection == "asc") ? "desc" : "asc")"
+       asp-route-firstName="@currentFirstName"
+       asp-route-lastName="@currentLastName"
+       asp-route-nationality="@currentNationality"
+       asp-route-positionId="@currentPositionId">Sort by Last Name @if (sortOrder == "lastName")
+        {
+            <i class="fas @(sortDirection == "asc" ? "fa-sort-up" : "fa-sort-down")"></i>
+        }</a>
+    |
+    <a asp-action="Index"
+       asp-route-sortOrder="age"
+       asp-route-sortDirection="@((sortOrder == "age" && sortDirection == "asc") ? "desc" : "asc")"
+       asp-route-firstName="@currentFirstName"
+       asp-route-lastName="@currentLastName"
+       asp-route-nationality="@currentNationality"
+       asp-route-positionId="@currentPositionId">Sort by Age @if (sortOrder == "age")
+        {
+            <i class="fas @(sortDirection == "asc" ? "fa-sort-up" : "fa-sort-down")"></i>
+        }</a>
+</div>
+
 
 <div class="row">
     @foreach (var player in Model)

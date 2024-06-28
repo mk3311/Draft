@@ -14,7 +14,7 @@ namespace Draft.Controllers
             _context = context;
         }
 
-        public IActionResult Index(string firstName, string lastName, string nationality, int? positionId)
+        public IActionResult Index(string firstName, string lastName, string nationality, int? positionId, string sortOrder, string sortDirection)
         {
             // Pobierz wszystkie pozycje dla wyszukiwania
             var positions = _context.Positions.ToList();
@@ -43,6 +43,24 @@ namespace Draft.Controllers
             {
                 players = players.Where(p => p.PositionId == positionId);
             }
+
+
+            switch (sortOrder)
+            {
+                case "firstName":
+                    players = sortDirection == "desc" ? players.OrderByDescending(p => p.FirstName) : players.OrderBy(p => p.FirstName);
+                    break;
+                case "lastName":
+                    players = sortDirection == "desc" ? players.OrderByDescending(p => p.LastName) : players.OrderBy(p => p.LastName);
+                    break;
+                case "age":
+                    players = sortDirection == "desc" ? players.OrderByDescending(p => p.Age) : players.OrderBy(p => p.Age);
+                    break;
+                default:
+                    players = players.OrderBy(p => p.LastName); // Domyślne sortowanie
+                    break;
+            }
+
 
 
             return View(players.ToList());
@@ -156,5 +174,39 @@ namespace Draft.Controllers
             return RedirectToAction("Index");
         }
 
+
+
+        public IActionResult AddPlayer()
+        {
+            var userRole = HttpContext.Session.GetString("UserRole");
+            if (userRole != "Admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+
+            // Przekazanie listy pozycji do widoku
+            var positions = _context.Positions.ToList();
+            ViewData["Positions"] = positions;
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddPlayer(Player newPlayer)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Players.Add(newPlayer);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            // Przekazanie listy pozycji do widoku ponownie w przypadku błędów walidacji
+            var positions = _context.Positions.ToList();
+            ViewData["Positions"] = positions;
+
+            return View(newPlayer);
+        }
     }
 }
