@@ -29,7 +29,7 @@ namespace Draft.Models
         [StringLength(100)]
         public string ClubName { get; set; }
 
-        public int? PositionId { get; set; }
+        public int PositionId { get; set; }
 
         [ForeignKey("PositionId")]
         public Position? Position { get; set; }

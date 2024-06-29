@@ -4,6 +4,7 @@ using Draft.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Draft.Migrations
 {
     [DbContext(typeof(DraftContext))]
-    partial class DraftContextModelSnapshot : ModelSnapshot
+    [Migration("20240628233335_testTeamModel4")]
+    partial class testTeamModel4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,7 +63,7 @@ namespace Draft.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PositionId")
+                    b.Property<int?>("PositionId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -96,37 +99,48 @@ namespace Draft.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Deffender1Id")
+                    b.Property<int?>("Deffender1Id")
+                        .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<int>("Deffender2Id")
+                    b.Property<int?>("Deffender2Id")
+                        .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<int>("Deffender3Id")
+                    b.Property<int?>("Deffender3Id")
+                        .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<int>("Deffender4Id")
+                    b.Property<int?>("Deffender4Id")
+                        .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<int>("Forward1Id")
+                    b.Property<int?>("Forward1Id")
+                        .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<int>("Forward2Id")
+                    b.Property<int?>("Forward2Id")
+                        .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<int>("GoalkeeperId")
+                    b.Property<int?>("GoalkeeperId")
+                        .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<int>("Midfielder1Id")
+                    b.Property<int?>("Midfielder1Id")
+                        .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<int>("Midfielder2Id")
+                    b.Property<int?>("Midfielder2Id")
+                        .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<int>("Midfielder3Id")
+                    b.Property<int?>("Midfielder3Id")
+                        .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<int>("Midfielder4Id")
+                    b.Property<int?>("Midfielder4Id")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -199,9 +213,7 @@ namespace Draft.Migrations
                 {
                     b.HasOne("Draft.Models.Position", "Position")
                         .WithMany("Players")
-                        .HasForeignKey("PositionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PositionId");
 
                     b.Navigation("Position");
                 });

@@ -7,51 +7,51 @@ namespace Draft.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Team Name is required.")]
         public string Name { get; set; }
 
-        public int? GoalkeeperId { get; set; }
-        [ForeignKey("GoalkeeperId")]
-        public Player Goalkeeper { get; set; }
+        [Required(ErrorMessage = "Goalkeeper is required.")]
+        public int GoalkeeperId { get; set; }
+        public Player? Goalkeeper { get; set; }
 
-        public int? Deffender1Id { get; set; }
-        [ForeignKey("Deffender1Id")]
-        public Player Deffender1 { get; set; }
+        [Required(ErrorMessage = "Defender 1 is required.")]
+        public int Deffender1Id { get; set; }
+        public Player? Deffender1 { get; set; }
 
-        public int? Deffender2Id { get; set; }
-        [ForeignKey("Deffender2Id")]
-        public Player Deffender2 { get; set; }
+        [Required(ErrorMessage = "Defender 2 is required.")]
+        public int Deffender2Id { get; set; }
+        public Player? Deffender2 { get; set; }
 
-        public int? Deffender3Id { get; set; }
-        [ForeignKey("Deffender3Id")]
-        public Player Deffender3 { get; set; }
+        [Required(ErrorMessage = "Defender 3 is required.")]
+        public int Deffender3Id { get; set; }
+        public Player? Deffender3 { get; set; }
 
-        public int? Deffender4Id { get; set; }
-        [ForeignKey("Deffender4Id")]
-        public Player Deffender4 { get; set; }
+        [Required(ErrorMessage = "Defender 4 is required.")]
+        public int Deffender4Id { get; set; }
+        public Player? Deffender4 { get; set; }
 
-        public int? Midfielder1Id { get; set; }
-        [ForeignKey("Midfielder1Id")]
-        public Player Midfielder1 { get; set; }
+        [Required(ErrorMessage = "Midfielder 1 is required.")]
+        public int Midfielder1Id { get; set; }
+        public Player? Midfielder1 { get; set; }
 
-        public int? Midfielder2Id { get; set; }
-        [ForeignKey("Midfielder2Id")]
-        public Player Midfielder2 { get; set; }
+        [Required(ErrorMessage = "Midfielder 2 is required.")]
+        public int Midfielder2Id { get; set; }
+        public Player? Midfielder2 { get; set; }
 
-        public int? Midfielder3Id { get; set; }
-        [ForeignKey("Midfielder3Id")]
-        public Player Midfielder3 { get; set; }
+        [Required(ErrorMessage = "Midfielder 3 is required.")]
+        public int Midfielder3Id { get; set; }
+        public Player? Midfielder3 { get; set; }
 
-        public int? Midfielder4Id { get; set; }
-        [ForeignKey("Midfielder4Id")]
-        public Player Midfielder4 { get; set; }
+        [Required(ErrorMessage = "Midfielder 4 is required.")]
+        public int Midfielder4Id { get; set; }
+        public Player? Midfielder4 { get; set; }
 
-        public int? Forward1Id { get; set; }
-        [ForeignKey("Forward1Id")]
-        public Player Forward1 { get; set; }
+        [Required(ErrorMessage = "Forward 1 is required.")]
+        public int Forward1Id { get; set; }
+        public Player? Forward1 { get; set; }
 
-        public int? Forward2Id { get; set; }
-        [ForeignKey("Forward2Id")]
-        public Player Forward2 { get; set; }
+        [Required(ErrorMessage = "Forward 2 is required.")]
+        public int Forward2Id { get; set; }
+        public Player? Forward2 { get; set; }
     }
 }

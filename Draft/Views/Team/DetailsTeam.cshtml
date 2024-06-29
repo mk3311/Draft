@@ -1,0 +1,151 @@
+﻿@model Draft.Models.Team
+
+@{
+    ViewData["Title"] = "Team Details";
+    var teamuser = ViewData["TeamUser"] as Draft.Models.User;
+}
+
+<style>
+    .player-card {
+        max-width: 12rem; /* maksymalna szerokość kafelka */
+        height: 100%; /* zapewnienie, że kafelki będą miały taką samą wysokość */
+        margin-bottom: 1rem; /* margines dolny między kafelkami */
+    }
+
+        .player-card .card-img-top {
+            height: 10rem; /* wysokość obrazka w kafelku */
+            object-fit: cover; /* dopasowanie obrazka do wymiarów */
+        }
+
+        .player-card .card-body {
+            text-align: center; /* wyśrodkowanie tekstu w kafelku */
+        }
+</style>
+
+<h1 class="text-left">@Model.Name</h1>
+<h2 class="text-left">Team user @teamuser.Username</h2>
+
+<div class="container">
+
+
+    <!-- Goalkeeper -->
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-3">
+            <div class="card player-card">
+                <img src="@Model.Goalkeeper.PhotoPath" class="card-img-top" alt="Goalkeeper Image">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Goalkeeper.FirstName @Model.Goalkeeper.LastName</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Defenders -->
+    <div class="row mb-4">
+        @* Defender 1 *@
+        <div class="col-md-3">
+            <div class="card player-card">
+                <img src="@Model.Deffender1.PhotoPath" class="card-img-top" alt="Defender 1 Image">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Deffender1.FirstName @Model.Deffender1.LastName</h5>
+                </div>
+            </div>
+        </div>
+
+        @* Defender 2 *@
+        <div class="col-md-3">
+            <div class="card player-card">
+                <img src="@Model.Deffender2.PhotoPath" class="card-img-top" alt="Defender 2 Image">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Deffender2.FirstName @Model.Deffender2.LastName</h5>
+                </div>
+            </div>
+        </div>
+
+        @* Defender 3 *@
+        <div class="col-md-3">
+            <div class="card player-card">
+                <img src="@Model.Deffender3.PhotoPath" class="card-img-top" alt="Defender 3 Image">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Deffender3.FirstName @Model.Deffender3.LastName</h5>
+                </div>
+            </div>
+        </div>
+
+        @* Defender 4 *@
+        <div class="col-md-3">
+            <div class="card player-card">
+                <img src="@Model.Deffender4.PhotoPath" class="card-img-top" alt="Defender 4 Image">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Deffender4.FirstName @Model.Deffender4.LastName</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Midfielders -->
+    <div class="row mb-4">
+        @* Midfielder 1 *@
+        <div class="col-md-3">
+            <div class="card player-card">
+                <img src="@Model.Midfielder1.PhotoPath" class="card-img-top" alt="Midfielder 1 Image">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Midfielder1.FirstName @Model.Midfielder1.LastName</h5>
+                </div>
+            </div>
+        </div>
+
+        @* Midfielder 2 *@
+        <div class="col-md-3">
+            <div class="card player-card">
+                <img src="@Model.Midfielder2.PhotoPath" class="card-img-top" alt="Midfielder 2 Image">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Midfielder2.FirstName @Model.Midfielder2.LastName</h5>
+                </div>
+            </div>
+        </div>
+
+        @* Midfielder 3 *@
+        <div class="col-md-3">
+            <div class="card player-card">
+                <img src="@Model.Midfielder3.PhotoPath" class="card-img-top" alt="Midfielder 3 Image">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Midfielder3.FirstName @Model.Midfielder3.LastName</h5>
+                </div>
+            </div>
+        </div>
+
+        @* Midfielder 4 *@
+        <div class="col-md-3">
+            <div class="card player-card">
+                <img src="@Model.Midfielder4.PhotoPath" class="card-img-top" alt="Midfielder 4 Image">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Midfielder4.FirstName @Model.Midfielder4.LastName</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forwards -->
+    <div class="row mb-4 justify-content-center">
+        @* Forward 1 *@
+        <div class="col-md-3">
+            <div class="card player-card">
+                <img src="@Model.Forward1.PhotoPath" class="card-img-top" alt="Forward 1 Image">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Forward1.FirstName @Model.Forward1.LastName</h5>
+                </div>
+            </div>
+        </div>
+
+        @* Forward 2 *@
+        <div class="col-md-3">
+            <div class="card player-card">
+                <img src="@Model.Forward2.PhotoPath" class="card-img-top" alt="Forward 2 Image">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Forward2.FirstName @Model.Forward2.LastName</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

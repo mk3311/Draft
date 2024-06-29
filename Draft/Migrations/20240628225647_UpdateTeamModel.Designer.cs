@@ -4,6 +4,7 @@ using Draft.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Draft.Migrations
 {
     [DbContext(typeof(DraftContext))]
-    partial class DraftContextModelSnapshot : ModelSnapshot
+    [Migration("20240628225647_UpdateTeamModel")]
+    partial class UpdateTeamModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,7 +63,7 @@ namespace Draft.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PositionId")
+                    b.Property<int?>("PositionId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -96,37 +99,37 @@ namespace Draft.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Deffender1Id")
+                    b.Property<int?>("Deffender1Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("Deffender2Id")
+                    b.Property<int?>("Deffender2Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("Deffender3Id")
+                    b.Property<int?>("Deffender3Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("Deffender4Id")
+                    b.Property<int?>("Deffender4Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("Forward1Id")
+                    b.Property<int?>("Forward1Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("Forward2Id")
+                    b.Property<int?>("Forward2Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("GoalkeeperId")
+                    b.Property<int?>("GoalkeeperId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Midfielder1Id")
+                    b.Property<int?>("Midfielder1Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("Midfielder2Id")
+                    b.Property<int?>("Midfielder2Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("Midfielder3Id")
+                    b.Property<int?>("Midfielder3Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("Midfielder4Id")
+                    b.Property<int?>("Midfielder4Id")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -199,9 +202,7 @@ namespace Draft.Migrations
                 {
                     b.HasOne("Draft.Models.Position", "Position")
                         .WithMany("Players")
-                        .HasForeignKey("PositionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PositionId");
 
                     b.Navigation("Position");
                 });
@@ -211,68 +212,57 @@ namespace Draft.Migrations
                     b.HasOne("Draft.Models.Player", "Deffender1")
                         .WithMany()
                         .HasForeignKey("Deffender1Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Draft.Models.Player", "Deffender2")
                         .WithMany()
                         .HasForeignKey("Deffender2Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Draft.Models.Player", "Deffender3")
                         .WithMany()
                         .HasForeignKey("Deffender3Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Draft.Models.Player", "Deffender4")
                         .WithMany()
                         .HasForeignKey("Deffender4Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Draft.Models.Player", "Forward1")
                         .WithMany()
                         .HasForeignKey("Forward1Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Draft.Models.Player", "Forward2")
                         .WithMany()
                         .HasForeignKey("Forward2Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Draft.Models.Player", "Goalkeeper")
                         .WithMany()
                         .HasForeignKey("GoalkeeperId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Draft.Models.Player", "Midfielder1")
                         .WithMany()
                         .HasForeignKey("Midfielder1Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Draft.Models.Player", "Midfielder2")
                         .WithMany()
                         .HasForeignKey("Midfielder2Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Draft.Models.Player", "Midfielder3")
                         .WithMany()
                         .HasForeignKey("Midfielder3Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Draft.Models.Player", "Midfielder4")
                         .WithMany()
                         .HasForeignKey("Midfielder4Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Deffender1");
 

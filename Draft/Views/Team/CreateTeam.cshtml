@@ -1,0 +1,169 @@
+﻿@model Draft.Models.Team
+
+@{
+    ViewData["Title"] = "Create Team";
+    var players = ViewData["Players"] as List<Draft.Models.Player>;
+}
+
+<h1>Create Team</h1>
+
+<form asp-action="CreateTeam" method="post">
+    <div class="form-group">
+        <label asp-for="Name">Team Name:</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <h2>Goalkeeper</h2>
+    <div class="form-group">
+        <label>Select Goalkeeper:</label>
+        <select asp-for="GoalkeeperId" class="form-control">
+            <option value="">-- Select Goalkeeper --</option>
+            @foreach (var player in players.Where(p => p.Position.Id == 1))
+            {
+                <option value="@player.Id">@player.FirstName @player.LastName</option>
+            }
+        </select>
+        <span asp-validation-for="GoalkeeperId" class="text-danger"></span>
+    </div>
+
+    <h2>Defenders</h2>
+    <div class="form-group">
+        <label>Select Defender 1:</label>
+        <select asp-for="Deffender1Id" class="form-control">
+            <option value="">-- Select Defender 1 --</option>
+            @foreach (var player in players.Where(p => p.Position.Id == 2))
+            {
+                <option value="@player.Id">@player.FirstName @player.LastName</option>
+            }
+        </select>
+        <span asp-validation-for="Deffender1Id" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Select Defender 2:</label>
+        <select asp-for="Deffender2Id" class="form-control">
+            <option value="">-- Select Defender 2 --</option>
+            @foreach (var player in players.Where(p => p.Position.Id == 2))
+            {
+                <option value="@player.Id">@player.FirstName @player.LastName</option>
+            }
+        </select>
+        <span asp-validation-for="Deffender2Id" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Select Defender 3:</label>
+        <select asp-for="Deffender3Id" class="form-control">
+            <option value="">-- Select Defender 3 --</option>
+            @foreach (var player in players.Where(p => p.Position.Id == 2))
+            {
+                <option value="@player.Id">@player.FirstName @player.LastName</option>
+            }
+        </select>
+        <span asp-validation-for="Deffender3Id" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Select Defender 4:</label>
+        <select asp-for="Deffender4Id" class="form-control">
+            <option value="">-- Select Defender 4 --</option>
+            @foreach (var player in players.Where(p => p.Position.Id == 2))
+            {
+                <option value="@player.Id">@player.FirstName @player.LastName</option>
+            }
+        </select>
+        <span asp-validation-for="Deffender4Id" class="text-danger"></span>
+    </div>
+
+    <h2>Midfielders</h2>
+    <div class="form-group">
+        <label>Select Midfielder 1:</label>
+        <select asp-for="Midfielder1Id" class="form-control">
+            <option value="">-- Select Midfielder 1 --</option>
+            @foreach (var player in players.Where(p => p.Position.Id == 3))
+            {
+                <option value="@player.Id">@player.FirstName @player.LastName</option>
+            }
+        </select>
+        <span asp-validation-for="Midfielder1Id" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Select Midfielder 2:</label>
+        <select asp-for="Midfielder2Id" class="form-control">
+            <option value="">-- Select Midfielder 2 --</option>
+            @foreach (var player in players.Where(p => p.Position.Id == 3))
+            {
+                <option value="@player.Id">@player.FirstName @player.LastName</option>
+            }
+        </select>
+        <span asp-validation-for="Midfielder2Id" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Select Midfielder 3:</label>
+        <select asp-for="Midfielder3Id" class="form-control">
+            <option value="">-- Select Midfielder 3 --</option>
+            @foreach (var player in players.Where(p => p.Position.Id == 3))
+            {
+                <option value="@player.Id">@player.FirstName @player.LastName</option>
+            }
+        </select>
+        <span asp-validation-for="Midfielder3Id" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Select Midfielder 4:</label>
+        <select asp-for="Midfielder4Id" class="form-control">
+            <option value="">-- Select Midfielder 4 --</option>
+            @foreach (var player in players.Where(p => p.Position.Id == 3))
+            {
+                <option value="@player.Id">@player.FirstName @player.LastName</option>
+            }
+        </select>
+        <span asp-validation-for="Midfielder4Id" class="text-danger"></span>
+    </div>
+
+    <h2>Forwards</h2>
+    <div class="form-group">
+        <label>Select Forward 1:</label>
+        <select asp-for="Forward1Id" class="form-control">
+            <option value="">-- Select Forward 1 --</option>
+            @foreach (var player in players.Where(p => p.Position.Id == 4))
+            {
+                <option value="@player.Id">@player.FirstName @player.LastName</option>
+            }
+        </select>
+        <span asp-validation-for="Forward1Id" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Select Forward 2:</label>
+        <select asp-for="Forward2Id" class="form-control">
+            <option value="">-- Select Forward 2 --</option>
+            @foreach (var player in players.Where(p => p.Position.Id == 4))
+            {
+                <option value="@player.Id">@player.FirstName @player.LastName</option>
+            }
+        </select>
+        <span asp-validation-for="Forward2Id" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create Team</button>
+</form>
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            // Ensure unique selection for each position
+            $('select').change(function () {
+                var selectedValue = $(this).val();
+                $('select').not(this).find('option[value="' + selectedValue + '"]').prop('disabled', true);
+            });
+        });
+    </script>
+}
