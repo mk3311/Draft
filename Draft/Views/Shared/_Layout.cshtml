@@ -54,6 +54,24 @@
                                     <button type="submit" class="btn btn-link nav-link" style="border: none; background: none; padding: 0;">My Profile</button>
                                 </form>
                             </li>
+                            @if(Context.Session.GetString("teamId") == "0")
+                            {
+                                <li class="nav-item" style="margin-left: 10px;">
+                                    <form asp-area="" asp-controller="Team" asp-action="CreateTeam" method="post" class="form-inline">
+                                        <button type="submit" class="btn btn-link nav-link" style="border: none; background: none; padding: 0;">Create Team</button>
+                                    </form>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item" style="margin-left: 10px;">
+                                    <form asp-area="" asp-controller="Team" asp-action="DetailsTeam" method="get" class="form-inline">
+                                        <input type="hidden" name="idteam" value="@Context.Session.GetString("teamId")" />
+                                        <button type="submit" class="btn btn-link nav-link" style="border: none; background: none; padding: 0;">My Team</button>
+                                    </form>
+                                </li>
+                            }
+
                             <li class="nav-item" style="margin-left: 10px;">
                                 <form asp-area="" asp-controller="Player" asp-action="Index" method="post" class="form-inline">
                                     <button type="submit" class="btn btn-link nav-link" style="border: none; background: none; padding: 0;">Players</button>

@@ -32,6 +32,7 @@ namespace Draft.Controllers
                 HttpContext.Session.SetString("Username", user.Username);
                 HttpContext.Session.SetString("UserRole", user.UserRole.ToString());
                 HttpContext.Session.SetString("id", user.Id.ToString());
+                HttpContext.Session.SetString("teamId", user?.TeamId?.ToString() ?? "0");
                 return RedirectToAction("Index", "Home");
             }
 

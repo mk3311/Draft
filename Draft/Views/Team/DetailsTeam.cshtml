@@ -7,23 +7,35 @@
 
 <style>
     .player-card {
-        max-width: 12rem; /* maksymalna szerokość kafelka */
-        height: 100%; /* zapewnienie, że kafelki będą miały taką samą wysokość */
-        margin-bottom: 1rem; /* margines dolny między kafelkami */
+        max-width: 12rem;
+        height: 100%; 
+        margin-bottom: 1rem; 
     }
 
         .player-card .card-img-top {
-            height: 10rem; /* wysokość obrazka w kafelku */
-            object-fit: cover; /* dopasowanie obrazka do wymiarów */
+            height: 10rem; 
+            object-fit: cover; 
         }
 
         .player-card .card-body {
-            text-align: center; /* wyśrodkowanie tekstu w kafelku */
+            text-align: center; 
         }
 </style>
 
 <h1 class="text-left">@Model.Name</h1>
 <h2 class="text-left">Team user @teamuser.Username</h2>
+
+@{
+    int currentUserTeamId = int.Parse(Context.Session.GetString("teamId"));
+
+    if (currentUserTeamId != null && currentUserTeamId == Model.Id)
+    {
+        <a asp-action="EditTeam" class="btn btn-primary">Edit Team</a>
+        //<a asp-action="DeletePlayer" asp-route-id="@Model.Id" class="btn btn-danger">Delete Player</a>
+    }
+}
+
+
 
 <div class="container">
 

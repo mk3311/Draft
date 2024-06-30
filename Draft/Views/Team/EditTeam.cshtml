@@ -1,13 +1,15 @@
 ﻿@model Draft.Models.Team
 
 @{
-    ViewData["Title"] = "Create Team";
+    ViewData["Title"] = "Edit Team";
     var players = ViewData["Players"] as List<Draft.Models.Player>;
 }
 
-<h1>Create Team</h1>
+<h1>Edit Team @Model.Name</h1>
 
-<form asp-action="CreateTeam" method="post">
+<form asp-action="EditTeam" method="post">
+
+    <input type="hidden" asp-for="Id" />
     <div class="form-group">
         <label asp-for="Name">Team Name:</label>
         <input asp-for="Name" class="form-control" />
@@ -150,8 +152,7 @@
         <span asp-validation-for="Forward2Id" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary">Create Team</button>
-    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Cancel</a>
+    <button type="submit" class="btn btn-primary">Edit Team</button>
 </form>
 
 
