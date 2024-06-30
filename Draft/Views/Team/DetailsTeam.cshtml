@@ -26,12 +26,15 @@
 <h2 class="text-left">Team user @teamuser.Username</h2>
 
 @{
+    if (!string.IsNullOrEmpty(Context.Session.GetString("teamId")))
+    {  
     int currentUserTeamId = int.Parse(Context.Session.GetString("teamId"));
 
     if (currentUserTeamId != null && currentUserTeamId == Model.Id)
     {
         <a asp-action="EditTeam" class="btn btn-primary">Edit Team</a>
-        //<a asp-action="DeletePlayer" asp-route-id="@Model.Id" class="btn btn-danger">Delete Player</a>
+        <a asp-action="DeleteTeam" class="btn btn-danger">Delete Team</a>
+    }
     }
 }
 

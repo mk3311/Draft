@@ -15,6 +15,21 @@ namespace Draft.Controllers
         }
 
 
+        public IActionResult Index(string searchString)
+        {
+            var teams = _context.Teams.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                teams = teams.Where(t => t.Name.Contains(searchString));
+            }
+
+            var users = _context.Users.ToList();
+            ViewData["Users"] = users;
+
+            return View(teams.ToList());
+        }
+
         public IActionResult CreateTeam()
         {
             var userId = HttpContext.Session.GetString("id");
@@ -52,8 +67,9 @@ namespace Draft.Controllers
                 var user = _context.Users.FirstOrDefault(u => u.Username == userName);
                 user.TeamId = team.Id;
                 _context.SaveChanges();
+                HttpContext.Session.SetString("teamId", team.Id.ToString());
                 ModelState.Clear();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("DetailsTeam", new { idteam = team.Id.ToString() });
             }
             var players = _context.Players.Include(p => p.Position).ToList();
             ViewData["Players"] = players;
@@ -150,6 +166,42 @@ namespace Draft.Controllers
             ViewData["Players"] = players;
             return View(updateTeam);
         }
+
+
+        public IActionResult DeleteTeam()
+        {
+            var userTeamId = HttpContext.Session.GetString("teamId");
+            if(userTeamId == "0")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var team = _context.Teams.FirstOrDefault(t => t.Id == int.Parse(userTeamId));
+            if (team == null)
+            {
+                return NotFound();
+            }
+
+            return View(team);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteTeam(int Id)
+        {
+            var team = _context.Teams.FirstOrDefault(t => t.Id == Id);
+            if (team == null)
+            {
+                return NotFound();
+            }
+
+            _context.Teams.Remove(team);
+            _context.SaveChanges();
+            HttpContext.Session.SetString("teamId", "0");
+            return RedirectToAction("Index", "Home");
+        }
+
+
+
 
     }
 }
