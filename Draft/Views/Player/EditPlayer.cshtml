@@ -15,31 +15,31 @@
         <span asp-validation-for="FirstName" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
+    <br /><div class="form-group">
         <label asp-for="LastName"></label>
         <input asp-for="LastName" class="form-control" />
         <span asp-validation-for="LastName" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
+    <br /><div class="form-group">
         <label asp-for="Age"></label>
         <input asp-for="Age" class="form-control" />
         <span asp-validation-for="Age" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
+    <br /><div class="form-group">
         <label asp-for="Height"></label>
         <input asp-for="Height" class="form-control" />
         <span asp-validation-for="Height" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
+    <br /><div class="form-group">
         <label asp-for="ClubName"></label>
         <input asp-for="ClubName" class="form-control" />
         <span asp-validation-for="ClubName" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
+    <br /><div class="form-group">
         <label asp-for="PositionId"></label>
         <select asp-for="PositionId" class="form-control">
             <option value="1">Goalkeeper</option>
@@ -63,6 +63,6 @@
     </div>
 
 
-    <button type="submit" class="btn btn-primary">Save</button>
+    <br /><button type="submit" class="btn btn-primary">Save</button>
     <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">Cancel</a>
 </form>

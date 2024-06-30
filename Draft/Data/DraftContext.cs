@@ -9,6 +9,8 @@ namespace Draft.Data
         public DbSet<Position> Positions { get; set; }
         public DbSet<Player> Players { get; set; }
         public DbSet<Team> Teams { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Favourite> Favourites { get; set; }
 
         public DraftContext(DbContextOptions<DraftContext> options) : base(options) { }
 

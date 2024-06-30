@@ -4,6 +4,7 @@ using Draft.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Draft.Migrations
 {
     [DbContext(typeof(DraftContext))]
-    partial class DraftContextModelSnapshot : ModelSnapshot
+    [Migration("20240630141200_AddComments2")]
+    partial class AddComments2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,29 +51,6 @@ namespace Draft.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Comments");
-                });
-
-            modelBuilder.Entity("Draft.Models.Favourite", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("TeamId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TeamId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Favourites");
                 });
 
             modelBuilder.Entity("Draft.Models.Player", b =>
@@ -265,25 +245,6 @@ namespace Draft.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Draft.Models.Favourite", b =>
-                {
-                    b.HasOne("Draft.Models.Team", "Team")
-                        .WithMany("Favourites")
-                        .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Draft.Models.User", "User")
-                        .WithMany("Favourites")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Team");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Draft.Models.Player", b =>
                 {
                     b.HasOne("Draft.Models.Position", "Position")
@@ -404,15 +365,11 @@ namespace Draft.Migrations
             modelBuilder.Entity("Draft.Models.Team", b =>
                 {
                     b.Navigation("Comments");
-
-                    b.Navigation("Favourites");
                 });
 
             modelBuilder.Entity("Draft.Models.User", b =>
                 {
                     b.Navigation("Comments");
-
-                    b.Navigation("Favourites");
                 });
 #pragma warning restore 612, 618
         }

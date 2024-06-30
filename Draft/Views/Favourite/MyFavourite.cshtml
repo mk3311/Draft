@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Draft.Models.Favourite>
+
+@{
+    ViewData["Title"] = "MYFavourite";
+    var users = ViewData["Users"] as List<Draft.Models.User>;
+}
+
+<h1>My Favourite Teams</h1>
+
+<div class="row">
+    @foreach (var favourite in Model)
+    {
+        var teamUser = users.FirstOrDefault(u => u.TeamId == favourite.Team.Id);
+        <div class="col-sm-4 mb-3">
+            <div class="card h-100 card-hover">
+                <div class="card-body text-center">
+                    <h5 class="card-title">@favourite.Team.Name</h5>
+                </div>
+                <div class="card-footer text-center">
+                    <h5>Team User: @teamUser.Username</h5>
+                    <a asp-controller="Team" asp-action="DetailsTeam" asp-route-idteam="@favourite.Team.Id" class="stretched-link"></a>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+

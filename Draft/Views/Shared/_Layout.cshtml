@@ -7,12 +7,64 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Draft.styles.css" asp-append-version="true" />
+    <style>
+        /* Wklej tutaj zaktualizowane style CSS */
+        /* Navbar custom styles */
+        .navbar-custom {
+            background-color: #004BFF; /* Niebieskie tło dla paska nawigacyjnego */
+        }
+
+            .navbar-custom .navbar-nav .nav-link {
+                color: #ffffff; /* Biały tekst dla linków w pasku nawigacyjnym */
+            }
+
+                .navbar-custom .navbar-nav .nav-link:hover {
+                    background-color: #004BFF; /* Niebieskie tło dla linków po najechaniu */
+                    color: #ffffff; /* Biały tekst po najechaniu */
+                }
+
+            .navbar-custom .navbar-nav .nav-item {
+                background-color: #ffffff; /* Białe tło dla elementów menu */
+                margin-left: 10px; /* Odstęp między elementami */
+            }
+
+                .navbar-custom .navbar-nav .nav-item:hover {
+                    background-color: #007bff; /* Niebieskie tło po najechaniu na element menu */
+                }
+
+            .navbar-custom .navbar-nav .btn-link.nav-link {
+                color: #000000; /* Czarny tekst dla przycisków/linków na białym tle */
+                background-color: #ffffff; /* Białe tło dla przycisków/linków */
+                padding: 5px 10px; /* Dodatkowe wcięcia dla przycisków/linków */
+                border-radius: 5px; /* Zaokrąglone rogi */
+                text-align: center; /* Wyśrodkowanie tekstu */
+            }
+
+                .navbar-custom .navbar-nav .btn-link.nav-link:hover {
+                    background-color: #007bff; /* Niebieskie tło po najechaniu */
+                    color: #ffffff; /* Biały tekst po najechaniu */
+                }
+
+            /* Dodatkowe style dla linków "Login" i "Register" */
+            .navbar-custom .navbar-nav .login-register-link {
+                background-color: #ffffff; /* Białe tło */
+                padding: 5px 10px; /* Dodatkowe wcięcia */
+                border-radius: 5px; /* Zaokrąglone rogi */
+                text-align: center; /* Wyśrodkowanie tekstu */
+                color: #000000; /* Czarny tekst */
+            }
+
+                .navbar-custom .navbar-nav .login-register-link:hover {
+                    background-color: #007bff; /* Niebieskie tło po najechaniu */
+                    color: #ffffff; /* Biały tekst po najechaniu */
+                }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light navbar-custom border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Draft</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="color: white;">Draft</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,66 +72,73 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link login-register-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link login-register-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav">
                         @if (string.IsNullOrEmpty(Context.Session.GetString("Username")))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                                <a class="nav-link login-register-link" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                                <a class="nav-link login-register-link" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
                             </li>
                         }
                         else
                         {
                             @if (Context.Session.GetString("UserRole") == "Admin")
                             {
-                                <li class="nav-item" style="margin-left: 10px;">
+                                <li class="nav-item">
                                     <form asp-area="" asp-controller="Player" asp-action="AddPlayer" method="get" class="form-inline">
-                                        <button type="submit" class="btn btn-link nav-link" style="border: none; background: none; padding: 0;">Add Player</button>
+                                        <button type="submit" class="btn btn-link nav-link">Add Player</button>
                                     </form>
                                 </li>
                             }
                             <li class="nav-item">
-                                <span class="navbar-text">Hi, @Context.Session.GetString("Username")!</span>
-                            </li>
-                            <li class="nav-item" style="margin-left: 10px;">
                                 <form asp-area="" asp-controller="User" asp-action="MyProfile" method="post" class="form-inline">
-                                    <button type="submit" class="btn btn-link nav-link" style="border: none; background: none; padding: 0;">My Profile</button>
+                                    <button type="submit" class="btn btn-link nav-link">My Profile</button>
                                 </form>
                             </li>
-                            @if(Context.Session.GetString("teamId") == "0")
+                            @if (Context.Session.GetString("teamId") == "0")
                             {
-                                <li class="nav-item" style="margin-left: 10px;">
+                                <li class="nav-item">
                                     <form asp-area="" asp-controller="Team" asp-action="CreateTeam" method="post" class="form-inline">
-                                        <button type="submit" class="btn btn-link nav-link" style="border: none; background: none; padding: 0;">Create Team</button>
+                                        <button type="submit" class="btn btn-link nav-link">Create Team</button>
                                     </form>
                                 </li>
                             }
                             else
                             {
-                                <li class="nav-item" style="margin-left: 10px;">
+                                <li class="nav-item">
                                     <form asp-area="" asp-controller="Team" asp-action="DetailsTeam" method="get" class="form-inline">
                                         <input type="hidden" name="idteam" value="@Context.Session.GetString("teamId")" />
-                                        <button type="submit" class="btn btn-link nav-link" style="border: none; background: none; padding: 0;">My Team</button>
+                                        <button type="submit" class="btn btn-link nav-link">My Team</button>
                                     </form>
                                 </li>
                             }
-
-                            <li class="nav-item" style="margin-left: 10px;">
-                                <form asp-area="" asp-controller="Player" asp-action="Index" method="post" class="form-inline">
-                                    <button type="submit" class="btn btn-link nav-link" style="border: none; background: none; padding: 0;">Players</button>
+                            <li class="nav-item">
+                                <form asp-area="" asp-controller="Favourite" asp-action="MyFavourite" method="get" class="form-inline">
+                                    <button type="submit" class="btn btn-link nav-link">Favourite Teams</button>
                                 </form>
                             </li>
-                            <li class="nav-item" style="margin-left: 10px;">
+                            <li class="nav-item">
+                                <form asp-area="" asp-controller="Team" asp-action="Index" method="post" class="form-inline">
+                                    <button type="submit" class="btn btn-link nav-link">Teams</button>
+                                </form>
+                            </li>
+
+                            <li class="nav-item">
+                                <form asp-area="" asp-controller="Player" asp-action="Index" method="post" class="form-inline">
+                                    <button type="submit" class="btn btn-link nav-link">Players</button>
+                                </form>
+                            </li>
+                            <li class="nav-item">
                                 <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" class="form-inline">
-                                    <button type="submit" class="btn btn-link nav-link" style="border: none; background: none; padding: 0;">Wyloguj</button>
+                                    <button type="submit" class="btn btn-link nav-link">Logout</button>
                                 </form>
                             </li>
                         }
@@ -94,9 +153,9 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-white" style="background-color: #004BFF;">
         <div class="container">
-            &copy; 2024 - Draft - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2024 - Draft - <a asp-area="" style="color: #ffffff" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

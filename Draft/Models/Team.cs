@@ -53,5 +53,8 @@ namespace Draft.Models
         [Required(ErrorMessage = "Forward 2 is required.")]
         public int Forward2Id { get; set; }
         public Player? Forward2 { get; set; }
+
+        public ICollection<Comment> Comments { get; set; } = new List<Comment>();
+        public ICollection<Favourite> Favourites { get; set; } = new List<Favourite>();
     }
 }

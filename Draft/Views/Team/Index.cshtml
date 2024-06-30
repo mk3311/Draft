@@ -9,7 +9,7 @@
 
 <form asp-action="Index" method="get" class="form-inline mb-3">
     <input type="text" name="searchString" class="form-control" placeholder="Search teams by name" value="@ViewData["CurrentFilter"]" />
-    <button type="submit" class="btn btn-primary ml-2">Search</button>
+    <br /><button type="submit" class="btn btn-primary ml-2">Search</button>
 </form>
 
 
@@ -18,7 +18,7 @@
     {
         var user = users.FirstOrDefault(u => u.TeamId == team.Id);
         <div class="col-sm-4 mb-3">
-            <div class="card h-100">
+            <div class="card h-100 card-hover">
                 <div class="card-body text-center">
                     <h5 class="card-title">@team.Name</h5>
                 </div>

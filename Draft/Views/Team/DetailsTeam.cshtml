@@ -3,6 +3,10 @@
 @{
     ViewData["Title"] = "Team Details";
     var teamuser = ViewData["TeamUser"] as Draft.Models.User;
+    var comments = ViewData["Comments"] as List<Draft.Models.Comment>;
+    var username = Context.Session.GetString("Username");
+    var currentUserId = Context.Session.GetString("id");
+    var isFavourite = ViewData["IsFavourite"] as bool?;
 }
 
 <style>
@@ -25,6 +29,23 @@
 <h1 class="text-left">@Model.Name</h1>
 <h2 class="text-left">Team user @teamuser.Username</h2>
 
+<a asp-action="Index" class="btn btn-secondary">Back</a><br />
+
+@if (!string.IsNullOrEmpty(username))
+{
+    <br /><div id="favouritesButtonContainer">
+        @if (!isFavourite.HasValue || !isFavourite.Value)
+        {
+            <button id="addToFavouritesButton" class="btn btn-primary">Add to Favourites</button><br />
+        }
+        else
+        {
+            <button id="removeFromFavouritesButton" class="btn btn-danger">Remove from Favourites</button><br />
+        }
+    </div>
+}
+
+
 @{
     if (!string.IsNullOrEmpty(Context.Session.GetString("teamId")))
     {  
@@ -32,26 +53,28 @@
 
     if (currentUserTeamId != null && currentUserTeamId == Model.Id)
     {
-        <a asp-action="EditTeam" class="btn btn-primary">Edit Team</a>
-        <a asp-action="DeleteTeam" class="btn btn-danger">Delete Team</a>
+        <br /><a asp-action="EditTeam" class="btn btn-primary">Edit Team</a>
+        <a asp-action="DeleteTeam" class="btn btn-danger">Delete Team</a><br />
     }
     }
 }
 
 
 
-<div class="container">
+<br /><div class="container border border-dark mb-4">
 
 
     <!-- Goalkeeper -->
     <div class="row justify-content-center mb-4">
         <div class="col-md-3">
-            <div class="card player-card">
+            <a asp-controller="Player" asp-action="Details" asp-route-id="@Model.Goalkeeper.Id" class="card-link">
+                <div class="card player-card card-hover">
                 <img src="@Model.Goalkeeper.PhotoPath" class="card-img-top" alt="Goalkeeper Image">
                 <div class="card-body">
                     <h5 class="card-title">@Model.Goalkeeper.FirstName @Model.Goalkeeper.LastName</h5>
                 </div>
             </div>
+            </a>
         </div>
     </div>
 
@@ -59,42 +82,50 @@
     <div class="row mb-4">
         @* Defender 1 *@
         <div class="col-md-3">
+            <a asp-controller="Player" asp-action="Details" asp-route-id="@Model.Deffender1.Id" class="card-link">
             <div class="card player-card">
                 <img src="@Model.Deffender1.PhotoPath" class="card-img-top" alt="Defender 1 Image">
                 <div class="card-body">
                     <h5 class="card-title">@Model.Deffender1.FirstName @Model.Deffender1.LastName</h5>
                 </div>
             </div>
+            </a>
         </div>
 
         @* Defender 2 *@
         <div class="col-md-3">
+            <a asp-controller="Player" asp-action="Details" asp-route-id="@Model.Deffender2.Id" class="card-link">
             <div class="card player-card">
                 <img src="@Model.Deffender2.PhotoPath" class="card-img-top" alt="Defender 2 Image">
                 <div class="card-body">
                     <h5 class="card-title">@Model.Deffender2.FirstName @Model.Deffender2.LastName</h5>
                 </div>
             </div>
+            </a>
         </div>
 
         @* Defender 3 *@
         <div class="col-md-3">
+            <a asp-controller="Player" asp-action="Details" asp-route-id="@Model.Deffender3.Id" class="card-link">
             <div class="card player-card">
                 <img src="@Model.Deffender3.PhotoPath" class="card-img-top" alt="Defender 3 Image">
                 <div class="card-body">
                     <h5 class="card-title">@Model.Deffender3.FirstName @Model.Deffender3.LastName</h5>
                 </div>
             </div>
+            </a>
         </div>
 
         @* Defender 4 *@
         <div class="col-md-3">
+            <a asp-controller="Player" asp-action="Details" asp-route-id="@Model.Deffender4.Id" class="card-link">
             <div class="card player-card">
                 <img src="@Model.Deffender4.PhotoPath" class="card-img-top" alt="Defender 4 Image">
                 <div class="card-body">
                     <h5 class="card-title">@Model.Deffender4.FirstName @Model.Deffender4.LastName</h5>
                 </div>
             </div>
+            </a>
         </div>
     </div>
 
@@ -102,42 +133,50 @@
     <div class="row mb-4">
         @* Midfielder 1 *@
         <div class="col-md-3">
+            <a asp-controller="Player" asp-action="Details" asp-route-id="@Model.Midfielder1.Id" class="card-link">
             <div class="card player-card">
                 <img src="@Model.Midfielder1.PhotoPath" class="card-img-top" alt="Midfielder 1 Image">
                 <div class="card-body">
                     <h5 class="card-title">@Model.Midfielder1.FirstName @Model.Midfielder1.LastName</h5>
                 </div>
             </div>
+            </a>
         </div>
 
         @* Midfielder 2 *@
         <div class="col-md-3">
+            <a asp-controller="Player" asp-action="Details" asp-route-id="@Model.Midfielder2.Id" class="card-link">
             <div class="card player-card">
                 <img src="@Model.Midfielder2.PhotoPath" class="card-img-top" alt="Midfielder 2 Image">
                 <div class="card-body">
                     <h5 class="card-title">@Model.Midfielder2.FirstName @Model.Midfielder2.LastName</h5>
                 </div>
             </div>
+            </a>
         </div>
 
         @* Midfielder 3 *@
         <div class="col-md-3">
+            <a asp-controller="Player" asp-action="Details" asp-route-id="@Model.Midfielder3.Id" class="card-link">
             <div class="card player-card">
                 <img src="@Model.Midfielder3.PhotoPath" class="card-img-top" alt="Midfielder 3 Image">
                 <div class="card-body">
                     <h5 class="card-title">@Model.Midfielder3.FirstName @Model.Midfielder3.LastName</h5>
                 </div>
             </div>
+            </a>
         </div>
 
         @* Midfielder 4 *@
         <div class="col-md-3">
+            <a asp-controller="Player" asp-action="Details" asp-route-id="@Model.Midfielder4.Id" class="card-link">
             <div class="card player-card">
                 <img src="@Model.Midfielder4.PhotoPath" class="card-img-top" alt="Midfielder 4 Image">
                 <div class="card-body">
                     <h5 class="card-title">@Model.Midfielder4.FirstName @Model.Midfielder4.LastName</h5>
                 </div>
             </div>
+            </a>
         </div>
     </div>
 
@@ -145,22 +184,117 @@
     <div class="row mb-4 justify-content-center">
         @* Forward 1 *@
         <div class="col-md-3">
+            <a asp-controller="Player" asp-action="Details" asp-route-id="@Model.Forward1.Id" class="card-link">
             <div class="card player-card">
                 <img src="@Model.Forward1.PhotoPath" class="card-img-top" alt="Forward 1 Image">
                 <div class="card-body">
                     <h5 class="card-title">@Model.Forward1.FirstName @Model.Forward1.LastName</h5>
                 </div>
             </div>
+            </a>
         </div>
 
         @* Forward 2 *@
         <div class="col-md-3">
+            <a asp-controller="Player" asp-action="Details" asp-route-id="@Model.Forward2.Id" class="card-link">
             <div class="card player-card">
                 <img src="@Model.Forward2.PhotoPath" class="card-img-top" alt="Forward 2 Image">
                 <div class="card-body">
                     <h5 class="card-title">@Model.Forward2.FirstName @Model.Forward2.LastName</h5>
                 </div>
             </div>
+            </a>
         </div>
     </div>
+
 </div>
+<!-- Comment Section -->
+<div class="comment-section">
+    <h3>Comments</h3>
+
+    @if (!string.IsNullOrEmpty(username))
+    {
+        <form asp-action="AddComment" asp-controller="Comment" method="post" class="comment-form">
+            <input type="hidden" name="UserId" value="@int.Parse(currentUserId)" />
+            <input type="hidden" name="TeamId" value="@Model.Id" />
+            <div class="form-group">
+                <textarea name="Content" class="form-control" placeholder="Enter your comment" required></textarea>
+            </div>
+            <br /><button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    }
+    else
+    {
+        <p>You must be logged in to post a comment.</p>
+    }
+
+    @if (comments != null && comments.Any())
+    {
+        <br />
+
+        <div class="row">
+            @foreach (var comment in comments)
+            {
+                <div class="col-md-12">
+                    <div class="card comment-card">
+                        <div class="card-body">
+                            <h5 class="card-title">@comment.User.Username</h5>
+                            <p class="card-text">@comment.Content</p>
+                            @if (comment.UserId.ToString() == currentUserId || teamuser.Id.ToString() == currentUserId)
+                            {
+                                <form asp-action="DeleteComment" asp-controller="Comment" method="post">
+                                    <input type="hidden" name="commentId" value="@comment.Id" />
+                                    <button type="submit" class="btn btn-danger">Delete Comment</button>
+                                </form>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p>No comments yet. Be the first to comment!</p>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Function to add team to favourites
+            $(document).on("click", "#addToFavouritesButton", function () {
+                var teamId = @Model.Id;
+                $.ajax({
+                    url: "/Favourite/AddFavourite",
+                    method: "POST",
+                    data: { teamId: teamId },
+                    success: function () {
+                      $("#favouritesButtonContainer").html('<button id="removeFromFavouritesButton" class="btn btn-danger mt-3">Remove from Favourites</button><br>');
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                        alert("Error adding team to favourites.");
+                    }
+                });
+            });
+
+            // Function to remove team from favourites
+            $(document).on("click", "#removeFromFavouritesButton", function () {
+                var teamId = @Model.Id;
+                $.ajax({
+                    url: "/Favourite/RemoveFavourite",
+                    method: "POST",
+                    data: { teamId: teamId },
+                    success: function () {
+                        $("#favouritesButtonContainer").html('<button id="addToFavouritesButton" class="btn btn-primary mt-3">Add to Favourites</button><br>');
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                        alert("Error removing team from favourites.");
+                    }
+                });
+            });
+        });
+    </script>
+}

@@ -34,7 +34,7 @@
                 }
             </select>
         </div>
-        <div class="col">
+        <br /><div class="col">
             <button type="submit" class="btn btn-primary">Search</button>
         </div>
     </div>
@@ -42,39 +42,49 @@
 
 <!-- Sortowanie -->
 <div class="mb-3">
-    <a asp-action="Index"
+    <a class="btn btn-primary"
+       asp-action="Index"
        asp-route-sortOrder="firstName"
        asp-route-sortDirection="@((sortOrder == "firstName" && sortDirection == "asc") ? "desc" : "asc")"
        asp-route-firstName="@currentFirstName"
        asp-route-lastName="@currentLastName"
        asp-route-nationality="@currentNationality"
-       asp-route-positionId="@currentPositionId">Sort by First Name @if (sortOrder == "firstName")
+       asp-route-positionId="@currentPositionId">
+        Sort by First Name @if (sortOrder == "firstName")
         {
             <i class="fas @(sortDirection == "asc" ? "fa-sort-up" : "fa-sort-down")"></i>
-        }</a>
+        }
+    </a>
     |
-    <a asp-action="Index"
+    <a class="btn btn-primary"
+       asp-action="Index"
        asp-route-sortOrder="lastName"
        asp-route-sortDirection="@((sortOrder == "lastName" && sortDirection == "asc") ? "desc" : "asc")"
        asp-route-firstName="@currentFirstName"
        asp-route-lastName="@currentLastName"
        asp-route-nationality="@currentNationality"
-       asp-route-positionId="@currentPositionId">Sort by Last Name @if (sortOrder == "lastName")
+       asp-route-positionId="@currentPositionId">
+        Sort by Last Name @if (sortOrder == "lastName")
         {
             <i class="fas @(sortDirection == "asc" ? "fa-sort-up" : "fa-sort-down")"></i>
-        }</a>
+        }
+    </a>
     |
-    <a asp-action="Index"
+    <a class="btn btn-primary"
+       asp-action="Index"
        asp-route-sortOrder="age"
        asp-route-sortDirection="@((sortOrder == "age" && sortDirection == "asc") ? "desc" : "asc")"
        asp-route-firstName="@currentFirstName"
        asp-route-lastName="@currentLastName"
        asp-route-nationality="@currentNationality"
-       asp-route-positionId="@currentPositionId">Sort by Age @if (sortOrder == "age")
+       asp-route-positionId="@currentPositionId">
+        Sort by Age @if (sortOrder == "age")
         {
             <i class="fas @(sortDirection == "asc" ? "fa-sort-up" : "fa-sort-down")"></i>
-        }</a>
+        }
+    </a>
 </div>
+
 
 
 <div class="row">
@@ -82,7 +92,7 @@
     {
         <div class="col-md-3 mb-4">
             <a asp-action="Details" asp-route-id="@player.Id" class="card-link">
-                <div class="card">
+                <div class="card card-hover">
                     <img class="card-img-top" src="@player.PhotoPath" alt="@player.FirstName @player.LastName" style="height: 200px; object-fit: cover;">
                     <div class="card-body">
                         <h5 class="card-title">@player.FirstName @player.LastName</h5>

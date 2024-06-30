@@ -94,8 +94,21 @@ namespace Draft.Controllers
             .Include(t => t.Forward2)
             .FirstOrDefault(t => t.Id == int.Parse(idteam));
 
+            var comments = _context.Comments
+                .Where(c => c.TeamId == int.Parse(idteam))
+                .Include(c => c.User) 
+                .ToList();
             var teamuser = _context.Users.FirstOrDefault(u => u.TeamId == int.Parse(idteam));
+
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("id")))
+            {
+                var userId = int.Parse(HttpContext.Session.GetString("id"));
+                var isFavourite = _context.Favourites.Any(f => f.UserId == userId && f.TeamId == int.Parse(idteam));
+                ViewData["IsFavourite"] = isFavourite;
+            }
+
             ViewData["TeamUser"] = teamuser;
+            ViewData["Comments"] = comments;
             return View(team);
         }
 

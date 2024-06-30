@@ -1,4 +1,4 @@
-html {
+﻿html {
   font-size: 14px;
 }
 
@@ -19,4 +19,60 @@ html {
 
 body {
   margin-bottom: 60px;
+}
+
+
+/* Navbar custom styles */
+.navbar-custom {
+    background-color: #004BFF; /* Niebieskie tło dla paska nawigacyjnego */
+}
+
+    .navbar-custom .navbar-nav .nav-link {
+        color: #ffffff; /* Biały tekst dla linków w pasku nawigacyjnym */
+    }
+
+        .navbar-custom .navbar-nav .nav-link:hover {
+            background-color: #004BFF; /* Niebieskie tło dla linków po najechaniu */
+            color: #ffffff; /* Biały tekst po najechaniu */
+        }
+
+    .navbar-custom .navbar-nav .nav-item {
+        background-color: #ffffff; /* Białe tło dla elementów menu */
+        margin-left: 10px; /* Odstęp między elementami */
+    }
+
+        .navbar-custom .navbar-nav .nav-item:hover {
+            background-color: #007bff; /* Niebieskie tło po najechaniu na element menu */
+        }
+
+    .navbar-custom .navbar-nav .btn-link.nav-link {
+        color: #000000; /* Czarny tekst dla przycisków/linków na białym tle */
+        background-color: #ffffff; /* Białe tło dla przycisków/linków */
+        padding: 5px 10px; /* Dodatkowe wcięcia dla przycisków/linków */
+        border-radius: 5px; /* Zaokrąglone rogi */
+        text-align: center; /* Wyśrodkowanie tekstu */
+    }
+
+        .navbar-custom .navbar-nav .btn-link.nav-link:hover {
+            background-color: #007bff; /* Niebieskie tło po najechaniu */
+            color: #ffffff; /* Biały tekst po najechaniu */
+        }
+
+    /* Dodatkowe style dla linków "Login" i "Register" */
+    .navbar-custom .navbar-nav .login-register-link {
+        background-color: #ffffff; /* Białe tło */
+        padding: 5px 10px; /* Dodatkowe wcięcia */
+        border-radius: 5px; /* Zaokrąglone rogi */
+        text-align: center; /* Wyśrodkowanie tekstu */
+        color: #000000; /* Czarny tekst */
+    }
+
+        .navbar-custom .navbar-nav .login-register-link:hover {
+            background-color: #007bff; /* Niebieskie tło po najechaniu */
+            color: #ffffff; /* Biały tekst po najechaniu */
+        }
+
+.card-hover:hover {
+    background-color: #f0f0f0; /* Ustaw tutaj kolor tła, który ma się pojawić po najechaniu */
+    border: 1px solid #ccc; /* Opcjonalnie: dodaj obramowanie */
 }
