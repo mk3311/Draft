@@ -9,6 +9,9 @@
     var currentLastName = Context.Request.Query["lastName"];
     var currentNationality = Context.Request.Query["nationality"];
     var currentPositionId = Context.Request.Query["positionId"];
+    var pageNumberString = Context.Request.Query["pageNumber"].ToString();
+    var currentPage = string.IsNullOrEmpty(pageNumberString) ? 1 : int.Parse(pageNumberString);
+    var totalPages = (int)ViewData["TotalPages"];
 }
 
 <h2>Players</h2>
@@ -102,3 +105,26 @@
         </div>
     }
 </div>
+
+
+<!-- Stronnicowanie -->
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        @for (int i = 1; i <= totalPages; i++)
+        {
+            <li class="page-item @(currentPage == i ? "active" : "")">
+                <a class="page-link"
+                   asp-action="Index"
+                   asp-route-firstName="@currentFirstName"
+                   asp-route-lastName="@currentLastName"
+                   asp-route-nationality="@currentNationality"
+                   asp-route-positionId="@currentPositionId"
+                   asp-route-sortOrder="@sortOrder"
+                   asp-route-sortDirection="@sortDirection"
+                   asp-route-pageNumber="@i">
+                    @i
+                </a>
+            </li>
+        }
+    </ul>
+</nav>

@@ -166,15 +166,12 @@
                 var currentValue = $(this).val();
                 var prevValue = $(this).attr('data-prev');
 
-                // Enable previously selected option
                 if (prevValue) {
                     $('select').not(this).find('option[value="' + prevValue + '"]').prop('disabled', false);
                 }
 
-                // Disable currently selected option
                 $('select').not(this).find('option[value="' + currentValue + '"]').prop('disabled', true);
 
-                // Update data-prev attribute
                 $(this).attr('data-prev', currentValue);
             });
         });

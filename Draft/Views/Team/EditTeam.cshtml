@@ -160,7 +160,6 @@
     <partial name="_ValidationScriptsPartial" />
     <script>
         $(document).ready(function () {
-            // Initial setup to disable selected options
             $('select').each(function () {
                 var selectedValue = $(this).val();
                 if (selectedValue) {
@@ -168,23 +167,18 @@
                 }
             });
 
-            // Ensure unique selection for each position
             $('select').change(function () {
                 var currentValue = $(this).val();
                 var prevValue = $(this).attr('data-prev');
 
-                // Enable previously selected option
                 if (prevValue) {
                     $('select').not(this).find('option[value="' + prevValue + '"]').prop('disabled', false);
                 }
 
-                // Disable currently selected option
                 $('select').not(this).find('option[value="' + currentValue + '"]').prop('disabled', true);
 
-                // Update the previous value
                 $(this).attr('data-prev', currentValue);
             }).each(function () {
-                // Store initial value in data-prev attribute
                 $(this).attr('data-prev', $(this).val());
             });
         });

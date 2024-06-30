@@ -11,7 +11,6 @@ namespace Draft.Models
         [StringLength(100)]
         public string Name { get; set; }
 
-        // Navigation property
         public ICollection<Player> Players { get; set; }
     }
 }

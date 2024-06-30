@@ -80,7 +80,6 @@
 
     <!-- Defenders -->
     <div class="row mb-4">
-        @* Defender 1 *@
         <div class="col-md-3">
             <a asp-controller="Player" asp-action="Details" asp-route-id="@Model.Deffender1.Id" class="card-link">
             <div class="card player-card">
@@ -92,7 +91,6 @@
             </a>
         </div>
 
-        @* Defender 2 *@
         <div class="col-md-3">
             <a asp-controller="Player" asp-action="Details" asp-route-id="@Model.Deffender2.Id" class="card-link">
             <div class="card player-card">
@@ -104,7 +102,6 @@
             </a>
         </div>
 
-        @* Defender 3 *@
         <div class="col-md-3">
             <a asp-controller="Player" asp-action="Details" asp-route-id="@Model.Deffender3.Id" class="card-link">
             <div class="card player-card">
@@ -116,7 +113,6 @@
             </a>
         </div>
 
-        @* Defender 4 *@
         <div class="col-md-3">
             <a asp-controller="Player" asp-action="Details" asp-route-id="@Model.Deffender4.Id" class="card-link">
             <div class="card player-card">
@@ -131,7 +127,6 @@
 
     <!-- Midfielders -->
     <div class="row mb-4">
-        @* Midfielder 1 *@
         <div class="col-md-3">
             <a asp-controller="Player" asp-action="Details" asp-route-id="@Model.Midfielder1.Id" class="card-link">
             <div class="card player-card">
@@ -143,7 +138,6 @@
             </a>
         </div>
 
-        @* Midfielder 2 *@
         <div class="col-md-3">
             <a asp-controller="Player" asp-action="Details" asp-route-id="@Model.Midfielder2.Id" class="card-link">
             <div class="card player-card">
@@ -155,7 +149,6 @@
             </a>
         </div>
 
-        @* Midfielder 3 *@
         <div class="col-md-3">
             <a asp-controller="Player" asp-action="Details" asp-route-id="@Model.Midfielder3.Id" class="card-link">
             <div class="card player-card">
@@ -167,7 +160,6 @@
             </a>
         </div>
 
-        @* Midfielder 4 *@
         <div class="col-md-3">
             <a asp-controller="Player" asp-action="Details" asp-route-id="@Model.Midfielder4.Id" class="card-link">
             <div class="card player-card">
@@ -182,7 +174,6 @@
 
     <!-- Forwards -->
     <div class="row mb-4 justify-content-center">
-        @* Forward 1 *@
         <div class="col-md-3">
             <a asp-controller="Player" asp-action="Details" asp-route-id="@Model.Forward1.Id" class="card-link">
             <div class="card player-card">
@@ -194,7 +185,6 @@
             </a>
         </div>
 
-        @* Forward 2 *@
         <div class="col-md-3">
             <a asp-controller="Player" asp-action="Details" asp-route-id="@Model.Forward2.Id" class="card-link">
             <div class="card player-card">
@@ -262,7 +252,6 @@
 @section Scripts {
     <script>
         $(document).ready(function () {
-            // Function to add team to favourites
             $(document).on("click", "#addToFavouritesButton", function () {
                 var teamId = @Model.Id;
                 $.ajax({
@@ -279,7 +268,6 @@
                 });
             });
 
-            // Function to remove team from favourites
             $(document).on("click", "#removeFromFavouritesButton", function () {
                 var teamId = @Model.Id;
                 $.ajax({

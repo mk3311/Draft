@@ -19,7 +19,6 @@ namespace Draft.Controllers
 
             if (string.IsNullOrEmpty(userId))
             {
-                // Redirect to home if user ID is not found in session
                 return RedirectToAction("Index", "Home");
             }
 
@@ -27,7 +26,6 @@ namespace Draft.Controllers
 
             if (user == null)
             {
-                // Redirect to home if no user found with this ID
                 return RedirectToAction("Index", "Home");
             }
 

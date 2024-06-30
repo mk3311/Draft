@@ -15,20 +15,19 @@ namespace Draft.Controllers
         }
 
 
-        // GET: /User/Login
+  
         public IActionResult Login()
         {
             return View();
         }
 
-        // POST: /User/Login
+
         [HttpPost]
         public IActionResult Login(string username, string password)
         {
             var user = _context.Users.FirstOrDefault(u => u.Username == username && u.Password == password);
             if (user != null)
             {
-                // Set session or cookies here
                 HttpContext.Session.SetString("Username", user.Username);
                 HttpContext.Session.SetString("UserRole", user.UserRole.ToString());
                 HttpContext.Session.SetString("id", user.Id.ToString());
@@ -40,13 +39,13 @@ namespace Draft.Controllers
             return View();
         }
 
-        // GET: /User/Register
+
         public IActionResult Register()
         {
             return View();
         }
 
-        // POST: /User/Register
+
         [HttpPost]
         public IActionResult Register(User user)
         {
@@ -69,11 +68,10 @@ namespace Draft.Controllers
             return View(user);
         }
 
-        // POST: /User/Logout
+
         [HttpPost]
         public IActionResult Logout()
         {
-            // Clear session or cookies here
             HttpContext.Session.Clear();
             return RedirectToAction("Login");
         }

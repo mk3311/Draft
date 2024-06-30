@@ -14,16 +14,13 @@ namespace Draft.Controllers
             _context = context;
         }
 
-        public IActionResult Index(string firstName, string lastName, string nationality, int? positionId, string sortOrder, string sortDirection)
+        public IActionResult Index(string firstName, string lastName, string nationality, int? positionId, string sortOrder, string sortDirection, int pageNumber = 1, int pageSize = 8)
         {
-            // Pobierz wszystkie pozycje dla wyszukiwania
             var positions = _context.Positions.ToList();
             ViewData["Positions"] = positions;
 
-            // Pobierz piłkarzy
             var players = _context.Players.Include(p => p.Position).AsQueryable();
 
-            // Filtruj piłkarzy
             if (!string.IsNullOrEmpty(firstName))
             {
                 players = players.Where(p => p.FirstName.Contains(firstName));
@@ -61,7 +58,10 @@ namespace Draft.Controllers
                     break;
             }
 
-
+            int totalPlayers = players.Count();
+            players = players.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+            ViewData["TotalPages"] = (int)Math.Ceiling((double)totalPlayers / pageSize);
+            ViewData["CurrentPage"] = pageNumber;
 
             return View(players.ToList());
         }
@@ -184,8 +184,6 @@ namespace Draft.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-
-            // Przekazanie listy pozycji do widoku
             var positions = _context.Positions.ToList();
             ViewData["Positions"] = positions;
 
@@ -202,7 +200,6 @@ namespace Draft.Controllers
                 return RedirectToAction("Index");
             }
 
-            // Przekazanie listy pozycji do widoku ponownie w przypadku błędów walidacji
             var positions = _context.Positions.ToList();
             ViewData["Positions"] = positions;
 

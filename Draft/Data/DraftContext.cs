@@ -19,7 +19,6 @@ namespace Draft.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // Konfiguracja relacji w modelu Team
             modelBuilder.Entity<Team>()
                 .HasOne(t => t.Goalkeeper)
                 .WithMany()
