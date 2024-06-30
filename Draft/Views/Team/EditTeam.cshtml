@@ -8,8 +8,8 @@
 <h1>Edit Team @Model.Name</h1>
 
 <form asp-action="EditTeam" method="post">
-
     <input type="hidden" asp-for="Id" />
+
     <div class="form-group">
         <label asp-for="Name">Team Name:</label>
         <input asp-for="Name" class="form-control" />
@@ -156,16 +156,36 @@
     <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Cancel</a>
 </form>
 
-
-
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script>
         $(document).ready(function () {
+            // Initial setup to disable selected options
+            $('select').each(function () {
+                var selectedValue = $(this).val();
+                if (selectedValue) {
+                    $('select').not(this).find('option[value="' + selectedValue + '"]').prop('disabled', true);
+                }
+            });
+
             // Ensure unique selection for each position
             $('select').change(function () {
-                var selectedValue = $(this).val();
-                $('select').not(this).find('option[value="' + selectedValue + '"]').prop('disabled', true);
+                var currentValue = $(this).val();
+                var prevValue = $(this).attr('data-prev');
+
+                // Enable previously selected option
+                if (prevValue) {
+                    $('select').not(this).find('option[value="' + prevValue + '"]').prop('disabled', false);
+                }
+
+                // Disable currently selected option
+                $('select').not(this).find('option[value="' + currentValue + '"]').prop('disabled', true);
+
+                // Update the previous value
+                $(this).attr('data-prev', currentValue);
+            }).each(function () {
+                // Store initial value in data-prev attribute
+                $(this).attr('data-prev', $(this).val());
             });
         });
     </script>

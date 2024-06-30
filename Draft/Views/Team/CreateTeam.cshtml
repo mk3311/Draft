@@ -154,16 +154,28 @@
     <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Cancel</a>
 </form>
 
-
-
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script>
         $(document).ready(function () {
-            // Ensure unique selection for each position
+            $('select').each(function () {
+                $(this).attr('data-prev', $(this).val());
+            });
+
             $('select').change(function () {
-                var selectedValue = $(this).val();
-                $('select').not(this).find('option[value="' + selectedValue + '"]').prop('disabled', true);
+                var currentValue = $(this).val();
+                var prevValue = $(this).attr('data-prev');
+
+                // Enable previously selected option
+                if (prevValue) {
+                    $('select').not(this).find('option[value="' + prevValue + '"]').prop('disabled', false);
+                }
+
+                // Disable currently selected option
+                $('select').not(this).find('option[value="' + currentValue + '"]').prop('disabled', true);
+
+                // Update data-prev attribute
+                $(this).attr('data-prev', currentValue);
             });
         });
     </script>
