@@ -21,7 +21,7 @@ namespace Draft.Models
         public int? TeamId { get; set; }
 
         [ForeignKey("TeamId")]
-        public Team Team { get; set; }
+        public Team? Team { get; set; }
 
 
         public ICollection<Comment> Comments { get; set; } = new List<Comment>();

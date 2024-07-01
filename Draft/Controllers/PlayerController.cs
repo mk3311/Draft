@@ -54,7 +54,7 @@ namespace Draft.Controllers
                     players = sortDirection == "desc" ? players.OrderByDescending(p => p.Age) : players.OrderBy(p => p.Age);
                     break;
                 default:
-                    players = players.OrderBy(p => p.LastName); // Domyślne sortowanie
+                    players = players.OrderBy(p => p.LastName);
                     break;
             }
 
